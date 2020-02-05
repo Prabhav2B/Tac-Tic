@@ -5,6 +5,10 @@ using MLAgents;
 
 public class TicTacAgent : Agent
 {
+    
+   
+
+    public Player player;
     public List<GameObject> grid;
     public override void AgentAction(float[] vectorAction)
     {
@@ -27,4 +31,5 @@ public class TicTacAgent : Agent
         base.AgentReset();
     }
 
+    public enum Player { Player1, Player2 };
 }

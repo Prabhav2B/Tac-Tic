@@ -7,9 +7,9 @@ public class GridElement : MonoBehaviour
 {
     int state;
     public int State { get { return state; } set { state = value; } }
+    GameObject visualStateX;
+    GameObject visualStateY;
 
-    public GameObject X;
-    public GameObject O;
     void Start()
     {
         ResetState();
