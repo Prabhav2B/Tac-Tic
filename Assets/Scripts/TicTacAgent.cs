@@ -78,8 +78,7 @@ public class TicTacAgent : Agent
 
     public override void AgentReset()
     {
-        //currently agent does not require any specific resetting
-        base.AgentReset();
+        gridController.GridReset();
     }
 
 

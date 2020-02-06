@@ -14,7 +14,7 @@ public class GridController : MonoBehaviour
 
     private void Awake()
     {
-        Academy.Instance.OnEnvironmentReset += GridReset;
+        //Academy.Instance.OnEnvironmentReset += GridReset;
     }
 
     private void Start()
@@ -53,19 +53,24 @@ public class GridController : MonoBehaviour
             }
         }
 
-        if (gridElements[1].State == gridElements[2].State && gridElements[2].State == gridElements[3].State && gridElements[1].State != 0)
+        if (gridElements[0].State == gridElements[1].State && gridElements[1].State == gridElements[2].State && gridElements[0].State != 0)
         {
-            AssignReward(gridElements[1].State);
+            AssignReward(gridElements[0].State);
             someoneWon = true;
         }
-        else if (gridElements[4].State == gridElements[5].State && gridElements[5].State == gridElements[6].State && gridElements[4].State != 0)
+        else if (gridElements[3].State == gridElements[4].State && gridElements[4].State == gridElements[5].State && gridElements[3].State != 0)
         {
-            AssignReward(gridElements[4].State);
+            AssignReward(gridElements[3].State);
             someoneWon = true;
         }
-        else if (gridElements[7].State == gridElements[8].State && gridElements[8].State == gridElements[9].State && gridElements[7].State != 0)
+        else if (gridElements[6].State == gridElements[7].State && gridElements[7].State == gridElements[8].State && gridElements[6].State != 0)
         {
-            AssignReward(gridElements[7].State);
+            AssignReward(gridElements[6].State);
+            someoneWon = true;
+        }
+        else if (gridElements[0].State == gridElements[3].State && gridElements[3].State == gridElements[6].State && gridElements[0].State != 0)
+        {
+            AssignReward(gridElements[0].State);
             someoneWon = true;
         }
         else if (gridElements[1].State == gridElements[4].State && gridElements[4].State == gridElements[7].State && gridElements[1].State != 0)
@@ -78,19 +83,14 @@ public class GridController : MonoBehaviour
             AssignReward(gridElements[2].State);
             someoneWon = true;
         }
-        else if (gridElements[3].State == gridElements[6].State && gridElements[6].State == gridElements[9].State && gridElements[3].State != 0)
+        else if (gridElements[0].State == gridElements[4].State && gridElements[4].State == gridElements[8].State && gridElements[0].State != 0)
         {
-            AssignReward(gridElements[3].State);
+            AssignReward(gridElements[0].State);
             someoneWon = true;
         }
-        else if (gridElements[1].State == gridElements[5].State && gridElements[5].State == gridElements[9].State && gridElements[1].State != 0)
+        else if (gridElements[2].State == gridElements[4].State && gridElements[4].State == gridElements[6].State && gridElements[2].State != 0)
         {
-            AssignReward(gridElements[1].State);
-            someoneWon = true;
-        }
-        else if (gridElements[3].State == gridElements[5].State && gridElements[5].State == gridElements[7].State && gridElements[3].State != 0)
-        {
-            AssignReward(gridElements[3].State);
+            AssignReward(gridElements[2].State);
             someoneWon = true;
         }
 
@@ -125,7 +125,7 @@ public class GridController : MonoBehaviour
         
     }
 
-    private void GridReset()
+    public void GridReset()
     {
         //Reset the Grid here
         foreach (var element in gridElements)

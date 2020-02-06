@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Grid: {fileID: 8162214284918592673}
+  Player1: {fileID: 3986360551444551488}
+  Player2: {fileID: 4857678764391648208}
 --- !u!1 &3896693279052108062
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +582,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3896693277946181776}
     m_Modifications:
+    - target: {fileID: 1065587404088983098, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: m_BrainParameters.numStackedVectorObservations
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065587404088983098, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: m_BrainParameters.vectorObservationSize
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1955063193030968019, guid: f48969b45fd36464fabc81b5b4c17c57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -640,6 +652,21 @@ PrefabInstance:
       propertyPath: gridGridController
       value: 
       objectReference: {fileID: 940947080309684338}
+    - target: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: agentParameters.onDemandDecision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: gridController
+      value: 
+      objectReference: {fileID: 940947080309684338}
     - target: {fileID: 8323498078564811074, guid: f48969b45fd36464fabc81b5b4c17c57,
         type: 3}
       propertyPath: m_Name
@@ -647,6 +674,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f48969b45fd36464fabc81b5b4c17c57, type: 3}
+--- !u!114 &3986360551444551488 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+    type: 3}
+  m_PrefabInstance: {fileID: 38692576388149320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6bf005d42032c9489edc375a7c2cbec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1993037641557357211 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1955063193030968019, guid: f48969b45fd36464fabc81b5b4c17c57,
@@ -1320,6 +1359,26 @@ PrefabInstance:
       propertyPath: gridGridController
       value: 
       objectReference: {fileID: 940947080309684338}
+    - target: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: agentParameters.onDemandDecision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: player
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: gridController
+      value: 
+      objectReference: {fileID: 940947080309684338}
     - target: {fileID: 8323498078564811074, guid: f48969b45fd36464fabc81b5b4c17c57,
         type: 3}
       propertyPath: m_Name
@@ -1327,6 +1386,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f48969b45fd36464fabc81b5b4c17c57, type: 3}
+--- !u!114 &4857678764391648208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
+    type: 3}
+  m_PrefabInstance: {fileID: 8409032377957952728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6bf005d42032c9489edc375a7c2cbec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8039811509267492363 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1955063193030968019, guid: f48969b45fd36464fabc81b5b4c17c57,
