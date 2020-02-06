@@ -10,30 +10,41 @@ public class GridElement : MonoBehaviour
     GameObject visualStateX;
     GameObject visualStateY;
 
+
     void Start()
     {
+        visualStateX = this.transform.GetChild(0).gameObject;
+        visualStateY = this.transform.GetChild(1).gameObject;
         ResetState();
+        Refresh();
     }
 
-    void ResetState()
+    public void ResetState()
     {
         State = 0;
+        Refresh();
     }
 
     void SetState(int val)
     {
-        State = val;        
+        State = val;
+        Refresh();
     }
 
     void Refresh()
     {
-        if (State == 1)
-        { 
-            
+        if (state == 0)
+        {
+            visualStateX.SetActive(false);
+            visualStateY.SetActive(false);
         }
-        else if (State == 2)
-        { 
-        
+        else if (state == 1)
+        {
+            visualStateX.SetActive(true);
+        }
+        else if (state == 2)
+        {
+            visualStateY.SetActive(true);
         }
     }
 }

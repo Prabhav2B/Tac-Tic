@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using MLAgents;
-using System;
+
 
 public class GridController : MonoBehaviour
 {
     public GameObject Grid;
-    Transform[,] gridPositions;
+    GridElement[] gridElements;
 
     private void Awake()
     {
@@ -14,13 +16,28 @@ public class GridController : MonoBehaviour
 
     private void Start()
     {
-        gridPositions = new Transform[3, 3];
+        gridElements = Grid.transform.GetComponentsInChildren<GridElement>(); 
         GridReset();
     }
 
     private void GridReset()
     {
         //Reset the Grid here
-        throw new NotImplementedException();
+        foreach (var element in gridElements)
+        {
+            element.gameObject.GetComponent<GridElement>().ResetState();
+        }
+    }
+
+    public int[] GridValues()
+    {
+        int[] gridValues = new int[9];
+        int i = 0;
+        foreach (var element in gridElements)
+        {
+            gridValues[i++] = element.State;
+        }
+
+        return gridValues;
     }
 }
