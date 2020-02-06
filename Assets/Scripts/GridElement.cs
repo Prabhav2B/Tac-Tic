@@ -25,7 +25,7 @@ public class GridElement : MonoBehaviour
         Refresh();
     }
 
-    void SetState(int val)
+    public void SetState(int val)
     {
         State = val;
         Refresh();

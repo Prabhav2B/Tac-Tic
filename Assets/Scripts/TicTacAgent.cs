@@ -61,7 +61,18 @@ public class TicTacAgent : Agent
     public override void AgentAction(float[] vectorAction)
     {
         //implement actions here
-        int move = Mathf.FloorToInt(vectorAction[0]);
+        int moveOnPosition = Mathf.FloorToInt(vectorAction[0]);
+
+        if (player == Player.Player1)
+        {
+            gridController.SetGridElement(moveOnPosition, 1);
+        }
+        else
+        {
+            gridController.SetGridElement(moveOnPosition, 2);
+        }
+
+        gridController.EndTurn();
     }
 
 
