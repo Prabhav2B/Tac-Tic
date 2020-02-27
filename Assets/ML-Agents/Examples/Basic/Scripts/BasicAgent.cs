@@ -4,7 +4,6 @@ using MLAgents;
 public class BasicAgent : Agent
 {
     [Header("Specific to Basic")]
-    BasicAcademy m_Academy;
     public float timeBetweenDecisionsAtInference;
     float m_TimeSinceDecision;
     int m_Position;
@@ -17,7 +16,6 @@ public class BasicAgent : Agent
 
     public override void InitializeAgent()
     {
-        m_Academy = FindObjectOfType(typeof(BasicAcademy)) as BasicAcademy;
     }
 
     public override void CollectObservations()
@@ -51,14 +49,14 @@ public class BasicAgent : Agent
 
         if (m_Position == m_SmallGoalPosition)
         {
-            Done();
             AddReward(0.1f);
+            Done();
         }
 
         if (m_Position == m_LargeGoalPosition)
         {
-            Done();
             AddReward(1f);
+            Done();
         }
     }
 
@@ -86,10 +84,6 @@ public class BasicAgent : Agent
         return new float[] { 0 };
     }
 
-    public override void AgentOnDone()
-    {
-    }
-
     public void FixedUpdate()
     {
         WaitTimeInference();
@@ -97,7 +91,7 @@ public class BasicAgent : Agent
 
     void WaitTimeInference()
     {
-        if (!m_Academy.IsCommunicatorOn)
+        if (!Academy.Instance.IsCommunicatorOn)
         {
             RequestDecision();
         }

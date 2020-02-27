@@ -23,6 +23,7 @@ public class GridElement : MonoBehaviour
     {
         State = 0;
         Refresh();
+        
     }
 
     public void SetState(int val)

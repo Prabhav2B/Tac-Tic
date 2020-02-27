@@ -14,7 +14,7 @@ public class GridController : MonoBehaviour
 
     private void Awake()
     {
-        //Academy.Instance.OnEnvironmentReset += GridReset;
+        Academy.Instance.OnEnvironmentReset += GridReset;
     }
 
     private void Start()
@@ -101,7 +101,9 @@ public class GridController : MonoBehaviour
             Player2.AddReward(-0.2f);
             Player2.Done();
         }
-        
+
+        Debug.Log(someoneWon);
+        Debug.Log(count);
 
         CheckTurn();
     }
@@ -127,10 +129,11 @@ public class GridController : MonoBehaviour
 
     public void GridReset()
     {
+        
         //Reset the Grid here
         foreach (var element in gridElements)
         {
-            element.gameObject.GetComponent<GridElement>().ResetState();
+            element.ResetState();
         }
     }
 
@@ -141,6 +144,7 @@ public class GridController : MonoBehaviour
         foreach (var element in gridElements)
         {
             gridValues[i++] = element.State;
+            
         }
 
         return gridValues;

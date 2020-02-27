@@ -30,8 +30,7 @@ public class TennisAgent : Agent
         m_BallRb = ball.GetComponent<Rigidbody>();
         var canvas = GameObject.Find(k_CanvasName);
         GameObject scoreBoard;
-        var academy = FindObjectOfType<Academy>();
-        m_ResetParams = academy.FloatProperties;
+        m_ResetParams = Academy.Instance.FloatProperties;
         if (invertX)
         {
             scoreBoard = canvas.transform.Find(k_ScoreBoardBName).gameObject;
@@ -55,12 +54,15 @@ public class TennisAgent : Agent
         AddVectorObs(ball.transform.position.y - myArea.transform.position.y);
         AddVectorObs(m_InvertMult * m_BallRb.velocity.x);
         AddVectorObs(m_BallRb.velocity.y);
+
+        AddVectorObs(m_InvertMult * gameObject.transform.rotation.z);
     }
 
     public override void AgentAction(float[] vectorAction)
     {
         var moveX = Mathf.Clamp(vectorAction[0], -1f, 1f) * m_InvertMult;
         var moveY = Mathf.Clamp(vectorAction[1], -1f, 1f);
+        var rotate = Mathf.Clamp(vectorAction[2], -1f, 1f) * m_InvertMult;
 
         if (moveY > 0.5 && transform.position.y - transform.parent.transform.position.y < -1.5f)
         {
@@ -68,6 +70,8 @@ public class TennisAgent : Agent
         }
 
         m_AgentRb.velocity = new Vector3(moveX * 30f, m_AgentRb.velocity.y, 0f);
+
+        m_AgentRb.transform.rotation = Quaternion.Euler(0f, -180f, 55f * rotate + m_InvertMult * 90f);
 
         if (invertX && transform.position.x - transform.parent.transform.position.x < -m_InvertMult ||
             !invertX && transform.position.x - transform.parent.transform.position.x > -m_InvertMult)
@@ -93,7 +97,7 @@ public class TennisAgent : Agent
     {
         m_InvertMult = invertX ? -1f : 1f;
 
-        transform.position = new Vector3(-m_InvertMult * Random.Range(6f, 8f), -1.5f, -3.5f) + transform.parent.transform.position;
+        transform.position = new Vector3(-m_InvertMult * Random.Range(6f, 8f), -1.5f, -1.8f) + transform.parent.transform.position;
         m_AgentRb.velocity = new Vector3(0f, 0f, 0f);
 
         SetResetParameters();
@@ -111,7 +115,7 @@ public class TennisAgent : Agent
 
     public void SetBall()
     {
-        scale = m_ResetParams.GetPropertyWithDefault("scale", 1);
+        scale = m_ResetParams.GetPropertyWithDefault("scale", .5f);
         ball.transform.localScale = new Vector3(scale, scale, scale);
     }
 

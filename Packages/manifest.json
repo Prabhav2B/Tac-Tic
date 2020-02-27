@@ -2,10 +2,11 @@
   "dependencies": {
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
-    "com.unity.barracuda": "0.4.0-preview",
+    "com.unity.barracuda": "0.6.0-preview",
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ide.rider": "1.1.4",
     "com.unity.ide.vscode": "1.1.4",
+    "com.unity.ml-agents": "file:C:/Users/nextt/Documents/ml-agent repos/ml-agents-latest_release-ver-14.0/ml-agents-latest_release/com.unity.ml-agents",
     "com.unity.test-framework": "1.1.9",
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.timeline": "1.2.10",

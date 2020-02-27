@@ -592,6 +592,11 @@ PrefabInstance:
       propertyPath: m_BrainParameters.vectorObservationSize
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1065587404088983098, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: m_TeamID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1955063193030968019, guid: f48969b45fd36464fabc81b5b4c17c57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -646,6 +651,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575634660702525008, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: DecisionPeriod
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4024832117169252104, guid: f48969b45fd36464fabc81b5b4c17c57,
         type: 3}
@@ -1299,6 +1309,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3896693277946181776}
     m_Modifications:
+    - target: {fileID: 1065587404088983098, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: m_BrainParameters.vectorObservationSize
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065587404088983098, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: m_BrainParameters.numStackedVectorObservations
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065587404088983098, guid: f48969b45fd36464fabc81b5b4c17c57,
+        type: 3}
+      propertyPath: m_TeamID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1955063193030968019, guid: f48969b45fd36464fabc81b5b4c17c57,
         type: 3}
       propertyPath: m_LocalPosition.x

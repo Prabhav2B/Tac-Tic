@@ -5,18 +5,24 @@ using MLAgents;
 
 public class TicTacAgent : Agent
 {
+
+    [Header("Specific to tac-tic")]
     public Player player;
     public GridController gridController;
 
 
     public void PlayTurn()
     {
-        RequestDecision();
+        if (Academy.Instance.IsCommunicatorOn)
+        {
+            RequestDecision();
+        }
     }
 
     public override void CollectObservations()
     {
         int[] observations = gridController.GridValues();
+        List<int> maskedElements = new List<int>();
         for (int i = 0; i < observations.Length; i++)
         {
 
@@ -53,13 +59,33 @@ public class TicTacAgent : Agent
             
             if (observations[i] != 0)
             {
-                SetActionMask(0, i);
+                maskedElements.Add(i);
             }
         }
+
+        string str = "";
+
+        if(maskedElements!=null)
+        {
+            //SetActionMask(0, maskedElements.ToArray());
+            foreach (var maskedElement in maskedElements)
+            {
+                SetActionMask(0, maskedElement);
+                str += maskedElement;
+            }
+        }
+        else
+        {
+            Debug.Log("Null Mask");
+        }
+
+        str += this.gameObject.name;
+        Debug.Log(str);
     }
 
     public override void AgentAction(float[] vectorAction)
     {
+        Debug.Log("taking action now");
         //implement actions here
         int moveOnPosition = Mathf.FloorToInt(vectorAction[0]);
 
@@ -78,6 +104,7 @@ public class TicTacAgent : Agent
 
     public override void AgentReset()
     {
+        Debug.Log("Reset yo!");
         gridController.GridReset();
     }
 

@@ -55,7 +55,7 @@ MonoBehaviour:
   m_BehaviorType: 0
   m_BehaviorName: TicTacBehavior
   m_TeamID: 0
-  m_useChildSensors: 1
+  m_UseChildSensors: 1
 --- !u!114 &4024832117169252104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,4 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bf005d42032c9489edc375a7c2cbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
   maxStep: 5000
+  player: 0
+  gridController: {fileID: 0}

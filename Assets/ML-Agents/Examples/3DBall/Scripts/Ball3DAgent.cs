@@ -11,8 +11,7 @@ public class Ball3DAgent : Agent
     public override void InitializeAgent()
     {
         m_BallRb = ball.GetComponent<Rigidbody>();
-        var academy = FindObjectOfType<Academy>();
-        m_ResetParams = academy.FloatProperties;
+        m_ResetParams = Academy.Instance.FloatProperties;
         SetResetParameters();
     }
 
@@ -44,8 +43,8 @@ public class Ball3DAgent : Agent
             Mathf.Abs(ball.transform.position.x - gameObject.transform.position.x) > 3f ||
             Mathf.Abs(ball.transform.position.z - gameObject.transform.position.z) > 3f)
         {
-            Done();
             SetReward(-1f);
+            Done();
         }
         else
         {
