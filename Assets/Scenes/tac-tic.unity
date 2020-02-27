@@ -354,6 +354,16 @@ PrefabInstance:
       propertyPath: Player2
       value: 
       objectReference: {fileID: 890441618}
+    - target: {fileID: 940947080309684338, guid: a4f8f990a90befd4a850340a5e98d6cc,
+        type: 3}
+      propertyPath: PlayerOh
+      value: 
+      objectReference: {fileID: 890441618}
+    - target: {fileID: 940947080309684338, guid: a4f8f990a90befd4a850340a5e98d6cc,
+        type: 3}
+      propertyPath: PlayerEx
+      value: 
+      objectReference: {fileID: 1524547207}
     - target: {fileID: 1027045738558115442, guid: a4f8f990a90befd4a850340a5e98d6cc,
         type: 3}
       propertyPath: m_BehaviorType
@@ -497,7 +507,7 @@ PrefabInstance:
     - target: {fileID: 3986360551444551488, guid: a4f8f990a90befd4a850340a5e98d6cc,
         type: 3}
       propertyPath: maxStep
-      value: 5000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4056188360747631703, guid: a4f8f990a90befd4a850340a5e98d6cc,
         type: 3}
@@ -587,7 +597,7 @@ PrefabInstance:
     - target: {fileID: 4857678764391648208, guid: a4f8f990a90befd4a850340a5e98d6cc,
         type: 3}
       propertyPath: maxStep
-      value: 5000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4996474291362319738, guid: a4f8f990a90befd4a850340a5e98d6cc,
         type: 3}

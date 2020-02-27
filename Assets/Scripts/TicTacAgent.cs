@@ -5,18 +5,51 @@ using MLAgents;
 
 public class TicTacAgent : Agent
 {
+    public enum Team
+    {
+        Oh = 0,
+        Ex = 1
+    }
+
+    [HideInInspector]
+    public Team team;
+    BehaviorParameters m_BehaviorParameters;
+    int m_PlayerIndex;
+
 
     [Header("Specific to tac-tic")]
-    public Player player;
     public GridController gridController;
+    
 
 
     public void PlayTurn()
     {
-        if (Academy.Instance.IsCommunicatorOn)
+        StartCoroutine("OneSecondPause");
+         RequestDecision();      
+    }
+
+    public override void InitializeAgent()
+    {
+        base.InitializeAgent();
+
+        m_BehaviorParameters = gameObject.GetComponent<BehaviorParameters>();
+        if (m_BehaviorParameters.m_TeamID == (int)Team.Ex)
         {
-            RequestDecision();
+            team = Team.Ex;
         }
+        else
+        {
+            team = Team.Oh;
+        }
+
+        var playerState = new TTPlayerState
+        {
+            agentScript = this,
+        };
+
+        gridController.playerStates.Add(playerState);
+        m_PlayerIndex = gridController.playerStates.IndexOf(playerState);
+        playerState.playerIndex = m_PlayerIndex;
     }
 
     public override void CollectObservations()
@@ -24,43 +57,22 @@ public class TicTacAgent : Agent
         int[] observations = gridController.GridValues();
         List<int> maskedElements = new List<int>();
         for (int i = 0; i < observations.Length; i++)
-        {
-
-            if (player == Player.Player1) //O
-            {
+        { 
                 if (observations[i] == 1)
                 {
-                    AddVectorObs(1);
+                    AddVectorObs(1); //Oh
+                    maskedElements.Add(i);
                 }
                 else if (observations[i] == 2)
                 {
-                    AddVectorObs(-1);
+                    AddVectorObs(-1); //Ex
+                    maskedElements.Add(i);
                 }
                 else
                 {
                     AddVectorObs(0);
                 }
-            }
-            else if (player == Player.Player2)//X
-            {
-                if (observations[i] == 1)
-                {
-                    AddVectorObs(-1);
-                }
-                else if (observations[i] == 2)
-                {
-                    AddVectorObs(1);
-                }
-                else
-                {
-                    AddVectorObs(0);
-                }
-            }
             
-            if (observations[i] != 0)
-            {
-                maskedElements.Add(i);
-            }
         }
 
         string str = "";
@@ -86,10 +98,17 @@ public class TicTacAgent : Agent
     public override void AgentAction(float[] vectorAction)
     {
         Debug.Log("taking action now");
+
+        foreach (var item in vectorAction)
+        {
+            Debug.Log(item);
+        }
+
+
         //implement actions here
         int moveOnPosition = Mathf.FloorToInt(vectorAction[0]);
 
-        if (player == Player.Player1)
+        if (team == Team.Oh)
         {
             gridController.SetGridElement(moveOnPosition, 1);
         }
@@ -113,5 +132,9 @@ public class TicTacAgent : Agent
     {
         return base.Heuristic();
     }
-    public enum Player { Player1, Player2 };
+
+    IEnumerator OneSecondPause()
+    {
+        yield return new WaitForSeconds(1f);
+    }
 }

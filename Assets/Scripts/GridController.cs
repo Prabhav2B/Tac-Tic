@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 
-
+[System.Serializable]
+public class TTPlayerState
+{
+    public int playerIndex;
+    public TicTacAgent agentScript;
+}
 public class GridController : MonoBehaviour
 {
+    [HideInInspector]
+    public List<TTPlayerState> playerStates = new List<TTPlayerState>();
+
     public GameObject Grid;
     GridElement[] gridElements;
-    public TicTacAgent Player1;
-    public TicTacAgent Player2;
+    public TicTacAgent PlayerOh;
+    public TicTacAgent PlayerEx;
     int turn;
 
     private void Awake()
@@ -23,17 +31,18 @@ public class GridController : MonoBehaviour
         gridElements = Grid.transform.GetComponentsInChildren<GridElement>(); 
         GridReset();
         CheckTurn();
+
     }
 
     private void CheckTurn()
     {
         if (turn == 1)
         {
-            Player1.PlayTurn();
+            PlayerOh.PlayTurn();
         }
         else
         {
-            Player2.PlayTurn();
+            PlayerEx.PlayTurn();
         }
     }
 
@@ -43,7 +52,6 @@ public class GridController : MonoBehaviour
 
         int count = 0;
         bool someoneWon = false;
-
 
         foreach (var element in gridElements)
         {
@@ -96,33 +104,43 @@ public class GridController : MonoBehaviour
 
         if (someoneWon == false && count == 0)
         {
-            Player1.AddReward(-0.2f);
-            Player1.Done();
-            Player2.AddReward(-0.2f);
-            Player2.Done();
+            foreach (var ps in playerStates)
+            {
+                ps.agentScript.AddReward(-0.2f);
+            }
+
+            foreach (var ps in playerStates)
+            {
+                ps.agentScript.Done();  //all agents need to be reset
+            }
         }
 
         Debug.Log(someoneWon);
         Debug.Log(count);
+        Debug.Log(turn);
 
         CheckTurn();
     }
 
     private void AssignReward(int state)
     {
-        if (state == 1)
+
+        foreach (var ps in playerStates)
         {
-            Player1.AddReward(1f);
-            Player1.Done();
-            Player2.AddReward(-1f);
-            Player2.Done();
+            if ((int)ps.agentScript.team == (state-1))
+            {
+                ps.agentScript.AddReward(1);
+            }
+            else
+            {
+                ps.agentScript.AddReward(-1);
+            }
+            
         }
-        else if (state == 2)
+
+        foreach (var ps in playerStates)
         {
-            Player1.AddReward(-1f);
-            Player1.Done();
-            Player2.AddReward(1f);
-            Player2.Done();
+            ps.agentScript.Done();  //all agents need to be reset
         }
         
     }
@@ -154,4 +172,6 @@ public class GridController : MonoBehaviour
     {
         gridElements[index].SetState(val);
     }
+
+    
 }

@@ -7,14 +7,14 @@ public class GridElement : MonoBehaviour
 {
     int state;
     public int State { get { return state; } set { state = value; } }
+    GameObject visualStateO;
     GameObject visualStateX;
-    GameObject visualStateY;
 
 
     void Start()
     {
-        visualStateX = this.transform.GetChild(0).gameObject;
-        visualStateY = this.transform.GetChild(1).gameObject;
+        visualStateO = this.transform.GetChild(0).gameObject;
+        visualStateX = this.transform.GetChild(1).gameObject;
         ResetState();
         Refresh();
     }
@@ -36,16 +36,16 @@ public class GridElement : MonoBehaviour
     {
         if (state == 0)
         {
+            visualStateO.SetActive(false);
             visualStateX.SetActive(false);
-            visualStateY.SetActive(false);
         }
         else if (state == 1)
         {
-            visualStateX.SetActive(true);
+            visualStateO.SetActive(true);
         }
         else if (state == 2)
         {
-            visualStateY.SetActive(true);
+            visualStateX.SetActive(true);
         }
     }
 }
