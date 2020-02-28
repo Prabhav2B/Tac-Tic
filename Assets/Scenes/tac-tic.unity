@@ -384,6 +384,11 @@ PrefabInstance:
       propertyPath: m_UseChildSensors
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1027045738558115442, guid: a4f8f990a90befd4a850340a5e98d6cc,
+        type: 3}
+      propertyPath: m_BrainParameters.vectorActionSize.Array.data[0]
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2395465645092845682, guid: a4f8f990a90befd4a850340a5e98d6cc,
         type: 3}
       propertyPath: m_Mesh
@@ -923,6 +928,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TeamID
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825745185320964834, guid: a4f8f990a90befd4a850340a5e98d6cc,
+        type: 3}
+      propertyPath: m_BrainParameters.vectorActionSize.Array.data[0]
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9115039571720980453, guid: a4f8f990a90befd4a850340a5e98d6cc,
         type: 3}
