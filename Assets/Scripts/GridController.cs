@@ -17,7 +17,8 @@ public class GridController : MonoBehaviour
     public GameObject Grid;
     GridElement[] gridElements;
     public TicTacAgent PlayerOh;
-    public TicTacAgent PlayerEx;
+    //public TicTacAgent PlayerEx;
+    public NaivePlayer PlayerEx;
     int turn;
 
     private void Awake()
@@ -57,7 +58,7 @@ public class GridController : MonoBehaviour
         {
             if (element.State == 0)
             {
-                count++;
+                ++count;
             }
         }
 
@@ -113,6 +114,11 @@ public class GridController : MonoBehaviour
             {
                 ps.agentScript.Done();  //all agents need to be reset
             }
+
+
+            //BruteForce Naive
+            PlayerEx.AddReward(-0.2f);
+            PlayerEx.Done();
         }
 
         Debug.Log(someoneWon);
@@ -137,6 +143,18 @@ public class GridController : MonoBehaviour
             }
             
         }
+
+        //BruteForce Naive
+        if ((int)PlayerEx.team == (state - 1))
+        {
+            PlayerEx.AddReward(1);
+        }
+        else
+        {
+            PlayerEx.AddReward(-1);
+        }
+
+        PlayerEx.Done();
 
         foreach (var ps in playerStates)
         {

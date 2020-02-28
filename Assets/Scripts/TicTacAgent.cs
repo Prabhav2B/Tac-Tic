@@ -19,6 +19,7 @@ public class TicTacAgent : Agent
 
     [Header("Specific to tac-tic")]
     public GridController gridController;
+    public bool playerControlled = false;
     
 
 
@@ -130,7 +131,32 @@ public class TicTacAgent : Agent
 
     public override float[] Heuristic()
     {
-        return base.Heuristic();
+        if (!playerControlled)
+        {
+            int[] observations = gridController.GridValues();
+            List<int> unoccupiedElements = new List<int>();
+            for (int i = 0; i < observations.Length; i++)
+            {
+                if (observations[i] == 0)
+                {
+                    unoccupiedElements.Add(i);
+                }
+            }
+
+            float randomMove;
+
+
+
+            if (unoccupiedElements.Count > 0)
+            {
+                randomMove = (float)unoccupiedElements[Random.Range(0, unoccupiedElements.Count)];
+                float[] move = { randomMove };
+
+                return (move);
+            }
+        }
+
+        return (null);
     }
 
     IEnumerator OneSecondPause()
