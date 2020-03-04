@@ -20,13 +20,13 @@ public class TicTacAgent : Agent
     [Header("Specific to tac-tic")]
     public GridController gridController;
     public bool playerControlled = false;
-    
 
+    NaivePlayer nv;
 
     public void PlayTurn()
     {
-        StartCoroutine("OneSecondPause");
-         RequestDecision();      
+        //StartCoroutine("OneSecondPause");      
+        RequestDecision();
     }
 
     public override void InitializeAgent()
@@ -51,6 +51,7 @@ public class TicTacAgent : Agent
         gridController.playerStates.Add(playerState);
         m_PlayerIndex = gridController.playerStates.IndexOf(playerState);
         playerState.playerIndex = m_PlayerIndex;
+        nv = FindObjectOfType<NaivePlayer>();
     }
 
     public override void CollectObservations()
@@ -93,17 +94,17 @@ public class TicTacAgent : Agent
         }
 
         str += this.gameObject.name;
-        Debug.Log(str);
+        
     }
 
     public override void AgentAction(float[] vectorAction)
     {
-        Debug.Log("taking action now");
+       
 
-        foreach (var item in vectorAction)
-        {
-            Debug.Log(item);
-        }
+        //foreach (var item in vectorAction)
+        //{
+        //    Debug.Log(item);
+        //}
 
 
         //implement actions here
@@ -118,13 +119,18 @@ public class TicTacAgent : Agent
             gridController.SetGridElement(moveOnPosition, 2);
         }
 
+        if (nv != null && (int)nv.playmode == 2)
+        {
+            nv.lastMove = moveOnPosition;
+        }
+
         gridController.EndTurn();
     }
 
 
     public override void AgentReset()
     {
-        Debug.Log("Reset yo!");
+        
         gridController.GridReset();
     }
 
@@ -159,8 +165,9 @@ public class TicTacAgent : Agent
         return (null);
     }
 
-    IEnumerator OneSecondPause()
+     IEnumerator OneSecondPause()
     {
         yield return new WaitForSeconds(1f);
+        RequestDecision();
     }
 }

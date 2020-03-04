@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,20 +11,55 @@ public class NaivePlayer : MonoBehaviour
         Ex = 1
     }
 
+    public enum PlayMode
+    {
+        Player=0,
+        Random=1,
+        MinMax=2
+    }
 
     public GridController gridController;
-    public bool playerControlled = false;
+    public PlayMode playmode = PlayMode.Player;
     public Team team = Team.Ex;
+    public MinMax minMax;
+
+    bool playerMove = false;
+    public bool PlayerMove { get{ return playerMove; } set{ playerMove = value; }}
+
+    int movePosition;
+    public int MovePosition { get { return movePosition; } set { movePosition = value; } }
+
+    [HideInInspector]
+    public int lastMove;
+
 
     float reward;
 
     public void PlayTurn()
     {
-        if (!playerControlled)
+        if ((int)playmode == 0)
+        {
+            StartCoroutine("WaitForPlayerAction");
+        }
+        else if ((int)playmode == 1)
         {
             float[] move = NaiveDecision();
             NaiveAction(move);
         }
+        else if ((int)playmode == 2)
+        {
+            float[] move = MinMax();
+            NaiveAction(move);
+        }
+        
+    }
+
+    private float[] MinMax()
+    {
+        float nextMove = (float)minMax.NextMove(lastMove);
+        float[] move = { nextMove };
+
+        return (move);
     }
 
     public float[] NaiveDecision()
@@ -39,7 +75,7 @@ public class NaivePlayer : MonoBehaviour
             }
         }
 
-        float randomMove = (float)unoccupiedElements[Random.Range(0, unoccupiedElements.Count)];
+        float randomMove = (float)unoccupiedElements[UnityEngine.Random.Range(0, unoccupiedElements.Count)];
         float[] move = { randomMove };
 
         return (move);  
@@ -72,5 +108,25 @@ public class NaivePlayer : MonoBehaviour
     {
         reward = 0;
         gridController.GridReset();
+    }
+
+    public void Reset()
+    {
+        minMax.Reset();
+    }
+    public IEnumerator WaitForPlayerAction()
+    {
+        while (true)
+        {
+            if (PlayerMove == true)
+            {
+                PlayerMove = false;
+                float[] move = { MovePosition };
+                NaiveAction(move);
+
+                break;
+            }
+            yield return null;
+        }
     }
 }

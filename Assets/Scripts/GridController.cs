@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
+using TMPro;
+using System;
 
 [System.Serializable]
 public class TTPlayerState
@@ -17,9 +19,19 @@ public class GridController : MonoBehaviour
     public GameObject Grid;
     GridElement[] gridElements;
     public TicTacAgent PlayerOh;
+    //public NaivePlayer PlayerOh;
     //public TicTacAgent PlayerEx;
     public NaivePlayer PlayerEx;
     int turn;
+
+    public TMP_Text Xwins;
+    public TMP_Text Owins;
+    public TMP_Text Draws;
+
+    int xwins;
+    int owins;
+    int draws;
+
 
     private void Awake()
     {
@@ -33,6 +45,9 @@ public class GridController : MonoBehaviour
         GridReset();
         CheckTurn();
 
+        xwins = 0;
+        owins = 0;
+        draws = 0;
     }
 
     private void CheckTurn()
@@ -115,15 +130,17 @@ public class GridController : MonoBehaviour
                 ps.agentScript.Done();  //all agents need to be reset
             }
 
-
+            draws++;
+            UpdateCanvas();
             //BruteForce Naive
             PlayerEx.AddReward(-0.2f);
             PlayerEx.Done();
+            PlayerEx.Reset();
+
+            turn = 1;//ayyy minimaxonly 
         }
 
-        Debug.Log(someoneWon);
-        Debug.Log(count);
-        Debug.Log(turn);
+        
 
         CheckTurn();
     }
@@ -144,6 +161,17 @@ public class GridController : MonoBehaviour
             
         }
 
+        if (state == 1)
+        {
+            owins++;
+        }
+        else if (state == 2)
+        {
+            xwins++;
+        }
+
+        UpdateCanvas();
+
         //BruteForce Naive
         if ((int)PlayerEx.team == (state - 1))
         {
@@ -153,14 +181,24 @@ public class GridController : MonoBehaviour
         {
             PlayerEx.AddReward(-1);
         }
-
         PlayerEx.Done();
+        //Plus minimax
+        PlayerEx.Reset();
 
         foreach (var ps in playerStates)
         {
             ps.agentScript.Done();  //all agents need to be reset
         }
+
+        turn = 1;//ayyminimaxonly
         
+    }
+
+    private void UpdateCanvas()
+    {
+        Xwins.text = "X Wins : " + xwins;
+        Owins.text = "O Wins : " + owins;
+        Draws.text = "Draws : " + draws;
     }
 
     public void GridReset()
